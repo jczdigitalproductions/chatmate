@@ -1,5 +1,7 @@
 # Chatmate for code verification for AIE Code Summit Hackathon 2026 
 Fetch.ai / ASI:One + Meta API
+<img width="1492" height="716" alt="two-fetch-agent" src="https://github.com/user-attachments/assets/f847ce7c-8ebf-42ce-b63b-4afd4e9dbdef" />
+
 
 demo video : https://youtu.be/I7yeCl1rGaI
 
