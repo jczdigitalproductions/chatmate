@@ -1,0 +1,83 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "asi1/asi1",
+  "small_model": "asi1/asi1-mini",
+  "provider": {
+    "asi1": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "ASI:One",
+      "options": {
+        "baseURL": "https://api.asi1.ai/v1",
+        "apiKey": "{env:ASI_ONE_API_KEY}"
+      },
+      "models": {
+        "asi1": {
+          "name": "ASI1",
+          "limit": {
+            "context": 196000,
+            "output": 40000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "asi1-ultra": {
+          "name": "ASI1 Ultra",
+          "limit": {
+            "context": 196000,
+            "output": 40000
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "asi1-mini": {
+          "name": "ASI1 Mini",
+          "limit": {
+            "context": 196000,
+            "output": 40000
+          },
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "mcp": {
+    "agentverse": {
+      "type": "remote",
+      "url": "https://mcp.agentverse.ai/mcp",
+      "enabled": true,
+      "headers": {
+        "Authorization": "Bearer {env:AGENTVERSE_API_KEY}"
+      },
+      "oauth": false
+    },
+    "agentverse-lite": {
+      "type": "remote",
+      "url": "https://mcp-lite.agentverse.ai/mcp",
+      "enabled": false,
+      "headers": {
+        "Authorization": "Bearer {env:AGENTVERSE_API_KEY}"
+      },
+      "oauth": false
+    }
+  }
+}

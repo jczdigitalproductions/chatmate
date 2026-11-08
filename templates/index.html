@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Chatmate · Trust but Verify</title><link rel="stylesheet" href="/static/style.css"><script src="/static/app.js" defer></script></head>
+<body><main>
+<header><span class="badge">TRUST BUT VERIFY · FETCH.AI + META</span><h1>Chatmate<span>.</span></h1><p>Independent tests. Frozen standards. An enforceable decision.</p></header>
+<section class="notice">This verifier supports small Python integer functions. It evaluates restricted syntax with no access to files, networks, imports or the operating system. Unsupported code and missing checks are blocked.</section>
+<details><summary>1 · Operator: prepare independent tests</summary>
+<p>Generate tests from requirements before submitting the implementation. Review expected results, then freeze the suite. Requirements go to Meta; candidate source does not.</p>
+<label for="operator-token">Operator credential</label><input id="operator-token" type="password" autocomplete="off">
+<label for="requirements">Behavior requirements</label><textarea id="requirements" maxlength="10000" rows="4">Implement add(a, b) for integer inputs between -1000000000 and 1000000000 inclusive. Return the integer arithmetic sum a + b, including negative values and zero.</textarea>
+<div class="fields"><div><label for="function">Function name</label><input id="function" value="add"></div><div><label for="parameters">Parameters (comma separated)</label><input id="parameters" value="a,b"></div></div>
+<div class="actions"><button id="generate" type="button">Generate blind test draft</button><button id="demo" type="button">Use offline demo suite</button></div>
+<label for="draft">Test draft · inspect expected outputs</label><textarea id="draft" rows="8" spellcheck="false" placeholder="Generated test draft appears here. You may also paste an operator-authored draft."></textarea>
+<label class="check"><input id="approved" type="checkbox"> I reviewed the expected results against the requirements.</label>
+<button id="freeze" type="button">Freeze reviewed suite</button><p id="operator-status" role="status"></p>
+</details>
+<form id="verify-form">
+<h2>2 · Submit a candidate</h2>
+<label for="submit-token">Submission credential</label><input id="submit-token" type="password" autocomplete="off">
+<label for="suite">Frozen suite ID</label><input id="suite" required pattern="[0-9a-f]{64}" placeholder="Suite ID supplied by the verifier operator">
+<label for="code">Candidate code</label><textarea id="code" required maxlength="50000" spellcheck="false">def add(a, b):
+    return a - b</textarea>
+<button id="submit" type="submit">Verify candidate →</button>
+</form>
+<section id="conversation" aria-live="polite" aria-label="Verification results"><p class="empty">Verify the defective example, change subtraction to addition, and submit against the same suite.</p></section>
+<footer>ACCEPT means every frozen test passed within the supported subset. It does not prove correctness for all inputs. Merge blocking requires connecting this gate to a required CI check. Credentials stay in page memory.</footer>
+</main></body></html>

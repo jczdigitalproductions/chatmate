@@ -1,0 +1,5 @@
+{
+  "requirements": "Implement add(a, b) for integer inputs between -1000000000 and 1000000000 inclusive. Return the integer arithmetic sum a + b, including negative values and zero. Do not coerce the result to boolean or clamp it.",
+  "function": "add",
+  "parameters": ["a", "b"]
+}

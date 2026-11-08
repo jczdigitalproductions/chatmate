@@ -1,0 +1,37 @@
+# Install as .github/workflows/chatmate-gate.yml after committing Chatmate
+# to the protected branch. Required status context: chatmate/verifier.
+name: Chatmate independent verifier
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+  statuses: write
+concurrency:
+  group: chatmate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check out trusted verifier at base revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+      - name: Fetch candidate objects without checking out or executing them
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          git fetch --no-tags origin "refs/pull/$PR_NUMBER/head"
+      - name: Install verifier dependency from trusted configuration
+        run: python3 -m pip install python-dotenv==1.2.3
+      - name: Verify and publish exact-head status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHATMATE_SIGNING_KEY_B64: ${{ secrets.CHATMATE_SIGNING_KEY_B64 }}
+          CHATMATE_SUITE_B64: ${{ secrets.CHATMATE_SUITE_B64 }}
+          # Set to the ONE file governed by the protected frozen suite.
+          CHATMATE_TARGET_FILE: candidate.py
+        run: python3 chatmate/integrations/ci.py

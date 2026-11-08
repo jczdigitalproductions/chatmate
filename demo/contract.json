@@ -1,0 +1,19 @@
+{
+  "requirements": "Implement add(a, b) for integer inputs between -1000000000 and 1000000000 inclusive. Return the integer arithmetic sum a + b, including negative values and zero. Do not coerce the result to boolean or clamp it.",
+  "function": "add",
+  "parameters": ["a", "b"],
+  "cases": [
+    {"args": [0, 0], "expected": 0},
+    {"args": [2, 3], "expected": 5},
+    {"args": [3, 2], "expected": 5},
+    {"args": [-2, -3], "expected": -5},
+    {"args": [9, -9], "expected": 0},
+    {"args": [0, 7], "expected": 7},
+    {"args": [-8, 0], "expected": -8},
+    {"args": [1000000000, 1000000000], "expected": 2000000000},
+    {"args": [-1000000000, -1000000000], "expected": -2000000000},
+    {"args": [-1000000000, 1], "expected": -999999999},
+    {"args": [1, -1000000000], "expected": -999999999},
+    {"args": [783, -921], "expected": -138}
+  ]
+}

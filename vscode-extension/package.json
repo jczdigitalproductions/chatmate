@@ -1,0 +1,49 @@
+{
+  "name": "chatmate-verifier",
+  "displayName": "Chatmate · Trust but Verify",
+  "description": "Requirements-first ASI:One tests, independent Fetch.ai verification, and Meta code review.",
+  "version": "0.3.0",
+  "publisher": "jczdigitalproductions",
+  "license": "MIT",
+  "engines": {"vscode": "^1.96.0"},
+  "categories": ["Testing", "Linters", "Other"],
+  "main": "./src/extension.js",
+  "extensionKind": ["ui"],
+  "capabilities": {"untrustedWorkspaces": {"supported": false}},
+  "activationEvents": ["onView:chatmate.panel"],
+  "scripts": {
+    "check": "node --check src/extension.js && node --check src/core.js && node --check media/panel.js",
+    "test": "node --test test/core.test.cjs test/extension.test.cjs",
+    "test:host": "node test/run-host.cjs",
+    "test:service": "node test/service.cjs",
+    "package": "python tools/package_vsix.py",
+    "package:vsce": "vsce package --allow-missing-repository --no-dependencies --out chatmate-verifier-0.3.0.vsix"
+  },
+  "contributes": {
+    "commands": [
+      {"command": "chatmate.open", "title": "Chatmate: Open Verifier"},
+      {"command": "chatmate.configureConnection", "title": "Chatmate: Configure Verifier Connection"},
+      {"command": "chatmate.configureSecret", "title": "Chatmate: Store or Remove Credential"},
+      {"command": "chatmate.newRequirements", "title": "Chatmate: Create Behavior Requirements"},
+      {"command": "chatmate.generateTests", "title": "Chatmate: Generate Blind Tests with ASI:One"},
+      {"command": "chatmate.freezeSuite", "title": "Chatmate: Freeze Reviewed Test Draft (Operator)"},
+      {"command": "chatmate.selectSuite", "title": "Chatmate: Select Frozen Suite"},
+      {"command": "chatmate.demoSuite", "title": "Chatmate: Load Offline Demo Suite (Operator)"},
+      {"command": "chatmate.verify", "title": "Chatmate: Verify Active Python File"},
+      {"command": "chatmate.crossReview", "title": "Chatmate: Ask Meta to Review Active File"},
+      {"command": "chatmate.showReport", "title": "Chatmate: Show Last Verification Report"}
+    ],
+    "viewsContainers": {"activitybar": [{"id": "chatmate", "title": "Chatmate", "icon": "media/icon.svg"}]},
+    "views": {"chatmate": [{"type": "webview", "id": "chatmate.panel", "name": "Independent Verifier"}]},
+    "configuration": {
+      "title": "Chatmate",
+      "properties": {
+        "chatmate.verifierUrl": {"type": "string", "default": "http://127.0.0.1:5050", "scope": "application", "description": "Trusted verifier service origin. Configure through the Chatmate connection command. HTTPS required except on loopback."},
+        "chatmate.transport": {"type": "string", "enum": ["direct", "agentverse"], "default": "direct", "scope": "application", "description": "Direct verifier or gateway-to-pinned-Agentverse-agent verification."},
+        "chatmate.asiModel": {"type": "string", "enum": ["asi1", "asi1-mini", "asi1-ultra"], "default": "asi1", "scope": "application", "description": "ASI:One model for requirements-only test generation."}
+      }
+    },
+    "menus": {"editor/title": [{"command": "chatmate.verify", "when": "editorLangId == python", "group": "navigation"}]}
+  },
+  "devDependencies": {"@vscode/vsce": "4.1.0", "@vscode/test-electron": "3.1.0"}
+}

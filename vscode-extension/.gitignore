@@ -1,0 +1,6 @@
+node_modules/
+*.vsix
+.vscode-test/
+.env*
+.npm-cache/
+setup.txt

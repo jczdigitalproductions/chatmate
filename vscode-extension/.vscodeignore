@@ -1,0 +1,11 @@
+.vscode/**
+test/**
+node_modules/**
+*.vsix
+package-lock.json
+.env*
+**/*.key
+**/.chatmate-state/**
+.npm-cache/**
+.vscode-test/**
+tools/**
