@@ -6,7 +6,7 @@ from uagents_core.contrib.protocols.chat import (
     chat_protocol_spec, ChatMessage, ChatAcknowledgement, TextContent,
 )
 
-TARGET = "agent1q0lu9cnradph7emz3vmmy9dyqeagcdp0ukdvzqrhdng0wpyl8dsfyq638jm"
+TARGET = "<ASI:One Key>"
 
 agent = Agent(
     name="laptop-talker",
