@@ -1,5 +1,8 @@
 # Chatmate for code verification for AIE Code Summit Hackathon 2026 
 Fetch.ai / ASI:One + Meta API
+
+demo video : https://youtu.be/I7yeCl1rGaI
+
 ## Chatmate v3 · VS Code independent verifier
 
 The primary interface is now the [Chatmate VS Code extension](vscode-extension/README.md). Its ASI:One test author uses `ASI_ONE_API_KEY` in VS Code SecretStorage. The independent verifier/gateway keeps `AGENTVERSE_API_KEY` and `META_MODEL_API_KEY` in its own private environment. The Python gate, signed suites, replay and CI integration below remain the verification backend.
